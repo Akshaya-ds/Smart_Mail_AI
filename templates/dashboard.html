@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="row mb-4">
+
+<div class="col">
+
+<h2 class="dashboard-title">
+
+AI Powered Email Priority Assistant
+
+</h2>
+
+<p class="dashboard-subtitle">
+
+Your emails are automatically classified using Machine Learning.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- Statistics -->
+
+<div class="row g-4 mb-5">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card">
+
+<div>
+
+<h6>Total Emails</h6>
+
+<h2>{{ total }}</h2>
+
+</div>
+
+<i class="bi bi-envelope-fill stats-icon"></i>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card important-card">
+
+<div>
+
+<h6>Important</h6>
+
+<h2>{{ important }}</h2>
+
+</div>
+
+<i class="bi bi-exclamation-circle-fill stats-icon"></i>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card average-card">
+
+<div>
+
+<h6>Average</h6>
+
+<h2>{{ average }}</h2>
+
+</div>
+
+<i class="bi bi-dash-circle-fill stats-icon"></i>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card low-card">
+
+<div>
+
+<h6>Low</h6>
+
+<h2>{{ low }}</h2>
+
+</div>
+
+<i class="bi bi-check-circle-fill stats-icon"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Search -->
+
+<div class="row mb-4">
+
+<div class="col-lg-8">
+
+<input
+
+type="text"
+
+class="form-control search-box"
+
+id="searchInput"
+
+placeholder="🔍 Search emails by subject or sender...">
+
+</div>
+
+<div class="col-lg-4 text-end">
+
+<button class="btn filter-btn active-filter" onclick="filterEmails('All')">
+
+All
+
+</button>
+
+<button class="btn filter-btn" onclick="filterEmails('Important')">
+
+Important
+
+</button>
+
+<button class="btn filter-btn" onclick="filterEmails('Average')">
+
+Average
+
+</button>
+
+<button class="btn filter-btn" onclick="filterEmails('Low')">
+
+Low
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- Email Cards -->
+
+<div id="emailContainer">
+
+{% for email in emails %}
+
+<div class="email-card"
+
+data-priority="{{ email.priority }}"
+
+data-search="{{ email.subject }} {{ email.sender }} {{ email.snippet }}">
+
+<div class="row">
+
+<div class="col-lg-10">
+
+<h4>
+
+📧 {{ email.subject }}
+
+</h4>
+
+<p>
+
+<b>From :</b>
+
+{{ email.sender }}
+
+</p>
+
+<p>
+
+<b>Date :</b>
+
+{{ email.date }}
+
+</p>
+
+<p>
+
+{{ email.snippet }}
+
+</p>
+
+</div>
+
+<div class="col-lg-2 text-center">
+
+{% if email.priority=="Important" %}
+
+<span class="badge bg-danger priority-badge">
+
+🔴 Important
+
+</span>
+
+{% elif email.priority=="Average" %}
+
+<span class="badge bg-warning text-dark priority-badge">
+
+🟡 Average
+
+</span>
+
+{% else %}
+
+<span class="badge bg-secondary priority-badge">
+
+⚪ Low
+
+</span>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

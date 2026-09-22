@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Latest Emails
+
+</h2>
+
+<div class="row">
+
+{% for email in emails %}
+
+<div class="col-md-6 mb-4">
+
+<div class="card shadow-sm h-100">
+
+<div class="card-body">
+
+<h5 class="card-title">
+
+📧 {{ email.subject }}
+
+</h5>
+
+<p>
+
+<b>From:</b>
+
+{{ email.sender }}
+
+</p>
+
+<p>
+
+<b>Date:</b>
+
+{{ email.date }}
+
+</p>
+
+<p>
+
+{{ email.snippet }}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

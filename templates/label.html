@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+Label Emails
+</h2>
+
+{% for email in emails %}
+
+<div class="card mb-4 shadow-sm">
+
+<div class="card-body">
+
+<h5>{{ email.subject }}</h5>
+
+<p>
+
+<b>From:</b>
+
+{{ email.sender }}
+
+</p>
+
+<p>
+
+{{ email.snippet }}
+
+</p>
+
+<form method="POST">
+
+<input
+type="hidden"
+name="email_id"
+value="{{ email.id }}"
+>
+
+<select
+name="label"
+class="form-select mb-3"
+>
+
+<option value="">Select Priority</option>
+
+<option value="2">🔴 Important</option>
+
+<option value="1">🟡 Average</option>
+
+<option value="0">⚪ Low</option>
+
+</select>
+
+<button
+class="btn btn-primary"
+type="submit"
+>
+
+Save Label
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
